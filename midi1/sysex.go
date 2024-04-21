@@ -15,6 +15,10 @@ const (
 	sysExEnd        = 3 << statusShift
 )
 
+// SysEx accepts a MIDI v1 sysex message, data, (including 0xF0 and 0xF7
+// delimiters) and re-encodes it into dst as a UMP-compliant sysex message.
+//
+// Returns the new slice.
 func SysEx(dst []ump.Word, data []byte) []ump.Word {
 	data = data[1 : len(data)-1] // strip 0xF0 and 0xF7, UMP doesn't require them
 
